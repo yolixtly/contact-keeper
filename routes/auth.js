@@ -5,6 +5,7 @@ const User = require('../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const config = require('config');
+const auth = require('../middleware/auth');
 
 
 // @route GET api/auth
@@ -68,8 +69,15 @@ router.post('/',
 // @route GET api/auth
 // @desc Get logged in user
 // @access Private
-router.post('/', () => {
-    res.send('Get logged in User');
+router.get('/', auth, async (req, res) => {
+    try {
+        // Get the user without the password
+        let user = await User.findById(req.user.id).select('-password');
+        res.json(user);
+    } catch (error) {
+        console.error(error.message);
+        res.status(500).send('Server Error');
+    }
 });
 
 module.exports = router;
