@@ -32,23 +32,24 @@ const ContactForm = () => {
             <input type='text' placeholder='Email' name='email' value={email} onChange={onChange} />
             <input type='text' placeholder='Phone' name='phone' value={phone} onChange={onChange} />
             <h5>Contact Type:</h5>
-            
             <input
                 type='radio'
                 name='type'
                 value='personal'
+                id='personal'
                 onChange={onChange}
                 defaultChecked={type === 'personal'}
             />{' '}
-            Personal {'  '}
+            <label htmlFor='personal'>Personal {'  '}</label>
             <input
                 type='radio'
                 name='type'
                 value='professional'
+                id='professional'
                 onChange={onChange}
                 defaultChecked={type === 'professional'}
-            />{' '}
-            Professional
+            />
+            <label htmlFor='professional'> Professional</label>
             <input type='submit' value='Add Contact' className='btn btn-primary btn-block' />
         </form>
     );
