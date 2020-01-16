@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
-import PropTypes from 'prop-types';
 import AlertContext from '../../context/alert/AlertContext';
-const Alerts = props => {
+const Alerts = () => {
     const alertContext = useContext(AlertContext);
     return (
         alertContext.alerts.length > 0 &&
