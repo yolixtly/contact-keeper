@@ -74,13 +74,35 @@ const AuthState = (props) => {
         }
     }
     // Login User (Login user and get token)
-    const login = () => {
-        console.log("login");
-    };
+    const login = async (formData) => {
+        const config = {
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        };
+
+        try {
+            // With the proxy setup on package.json, no need to put the entire url
+            const res = await axios.post('/api/auth', formData, config);
+            dispatch({
+                type: LOGIN_SUCCESS,
+                payload: res.data
+            });
+
+            loadUser();
+        } catch (error) {
+            dispatch({
+                type: LOGIN_FAIL,
+                payload: error.response.data.msg
+            })
+        }
+    }
 
     // Logout
     const logout = () => {
-        console.log("logout");
+        dispatch({
+            type: LOGOUT
+        });
     };
 
     // Clear Errors
