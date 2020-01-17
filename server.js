@@ -22,7 +22,7 @@ if (process.env.NODE_ENV === 'production') {
     // Catch anything that is not the defined Routes
     app.get('*', (req, res) => {
         res.sendFile(__dirname, 'client', 'build',
-            'index.html');
+        'index.html');
     });
 }
 const PORT = process.env.PORT || 5000;
