@@ -39,6 +39,18 @@ router.post('/', [
     const { name, email, phone, type } = req.body;
 
     try {
+        // Verify new Contact's email is unique among User's Contact
+        const contact = await Contact.find({
+            user: req.user.id,
+            email: email
+        });
+
+        if (contact.length) {
+            console.log('found Contact', contact)
+            return res.status(503).json({ msg: 'Contact with email already exists' });
+        }
+
+        // Create new Contact
         const newContact = new Contact({
             name,
             email,
@@ -47,9 +59,9 @@ router.post('/', [
             user: req.user.id
         });
 
-        const contact = await newContact.save();
-
-        res.json(contact);
+        console.log('new Contact', newContact)
+        const savedContact = await newContact.save();
+        res.json(savedContact);
     } catch (error) {
         console.error(error.message);
         res.status(500).send('Server Error');
