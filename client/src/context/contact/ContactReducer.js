@@ -23,7 +23,7 @@ export default (state, action) => {
         case ADD_CONTACT: {
             return {
                 ...state,
-                contacts: [...state.contacts, action.payload],
+                contacts: [action.payload, ...state.contacts],
                 loading: false
             };
         };
@@ -32,7 +32,7 @@ export default (state, action) => {
             return {
                 ...state,
                 contacts: state.contacts.map(contact => {
-                    if (contact.id === action.payload.id) {
+                    if (contact._id === action.payload._id) {
                         // Set the updated contact
                         return action.payload
                     } else {
@@ -56,7 +56,7 @@ export default (state, action) => {
             return {
                 ...state,
                 contacts: state.contacts.filter((contact) => {
-                    return contact.id !== action.payload
+                    return contact._id !== action.payload
                 }),
                 loading: false
             };
