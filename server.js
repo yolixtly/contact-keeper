@@ -9,6 +9,12 @@ connectDB();
 // Init Middleware (accepts the incoming body Data)
 app.use(express.json({ extended: false }));
 
+// Default Route
+app.get('/', (req, res) => {
+    res.sendFile(__dirname, 'client', 'build',
+        'index.html');
+});
+
 // Routes
 app.use('/api/users', require('./routes/users'));
 app.use('/api/auth', require('./routes/auth'));
@@ -22,7 +28,7 @@ if (process.env.NODE_ENV === 'production') {
     // Catch anything that is not the defined Routes
     app.get('*', (req, res) => {
         res.sendFile(__dirname, 'client', 'build',
-        'index.html');
+            'index.html');
     });
 }
 const PORT = process.env.PORT || 5000;
