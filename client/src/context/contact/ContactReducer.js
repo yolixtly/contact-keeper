@@ -26,8 +26,7 @@ export default (state, action) => {
                 contacts: [action.payload, ...state.contacts],
                 loading: false
             };
-        };
-
+        }
         case UPDATE_CONTACT: {
             return {
                 ...state,
@@ -52,7 +51,7 @@ export default (state, action) => {
                 error: null
             }
         }
-        case DELETE_CONTACT: {
+        case DELETE_CONTACT:
             return {
                 ...state,
                 contacts: state.contacts.filter((contact) => {
@@ -60,15 +59,11 @@ export default (state, action) => {
                 }),
                 loading: false
             };
-        };
-
-        case SET_CURRENT: {
+        case SET_CURRENT:
             return {
                 ...state,
                 current: action.payload
             };
-        };
-
         case CLEAR_CURRENT: {
             return {
                 ...state,
