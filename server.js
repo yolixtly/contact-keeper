@@ -9,12 +9,6 @@ connectDB();
 // Init Middleware (accepts the incoming body Data)
 app.use(express.json({ extended: false }));
 
-// Default Route
-app.get('/', (req, res) => {
-    res.sendFile(__dirname, 'client', 'build',
-        'index.html');
-});
-
 // Routes
 app.use('/api/users', require('./routes/users'));
 app.use('/api/auth', require('./routes/auth'));
@@ -32,5 +26,5 @@ if (process.env.NODE_ENV === 'production') {
     });
 }
 const PORT = process.env.PORT || 5000;
-
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`))
+const HOST = '0.0.0.0';
+app.listen(PORT, HOST, () => console.log(`Server started on port ${PORT}`))
